@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Цифровое правосудие - прототип v4</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand"><span class="crest">РФ</span><strong>Единая платформа «Цифровое правосудие»</strong></div>
+      <div class="mark">М</div>
+      <div class="top-actions"><button class="icon">15</button><button class="icon">?</button><button class="avatar">ПК</button></div>
+    </header>
+
+    <div class="shell">
+      <aside class="rail">
+        <button class="rail-btn">»</button>
+        <button class="rail-btn active" data-view="command">⌂</button>
+        <button class="rail-btn" data-view="registry">Р</button>
+        <button class="rail-btn" data-view="video">В</button>
+        <button class="rail-btn" data-view="party">С</button>
+        <button class="rail-btn" data-view="assist">Д</button>
+        <button class="rail-btn" data-view="test">UX</button>
+      </aside>
+
+      <main>
+        <section class="case">
+          <div>
+            <button class="back">‹</button>
+            <h1>Заседание № А40-18472/2026</h1>
+            <p>Иванов И. И. против ООО «Вектор» · судья Н. В. Орлова · помощник А. С. Ким</p>
+          </div>
+          <div class="summary">
+            <article><span>Стадия</span><strong id="stage">Подготовка</strong></article>
+            <article><span>ВКС</span><strong>IVA · резерв готов</strong></article>
+            <article><span>Критично</span><strong id="criticalCount">3 решения</strong></article>
+            <button class="primary" id="startSession">Открыть заседание</button>
+            <button id="finishSession">Завершить</button>
+          </div>
+        </section>
+
+        <section class="critical-bar" id="criticalBar">
+          <strong>Завершение заблокировано</strong>
+          <span>Остались критичные события: ходатайство о прекращении, отвод судьи, неподписанная подписка переводчика.</span>
+          <button data-view-jump="registry">Разобрать</button>
+        </section>
+
+        <nav class="tabs">
+          <button class="tab active" data-view="command">Пульт суда</button>
+          <button class="tab" data-view="registry">Реестр решений</button>
+          <button class="tab" data-view="video">Видео и ВКС</button>
+          <button class="tab" data-view="party">АРМ стороны</button>
+          <button class="tab" data-view="assist">Доп. участники</button>
+          <button class="tab" data-view="test">UX-тест</button>
+        </nav>
+
+        <section class="view active" id="command">
+          <div class="grid command-grid">
+            <section class="panel">
+              <div class="panel-head">
+                <div><p class="label">Сценарный помощник</p><h2>Что делать сейчас</h2></div>
+                <span class="badge red">P1</span>
+              </div>
+              <div class="next-step">
+                <span>1 из 4</span>
+                <strong id="nextTitle">Рассмотреть ходатайство о прекращении дела</strong>
+                <p id="nextText">Это действие влияет на возможность продолжения заседания. Пока решение не принято, завершение и подписание протокола недоступны.</p>
+                <div class="step-actions">
+                  <button class="primary" data-open="termination">Открыть карточку</button>
+                  <button data-open="whyBlocked">Почему заблокировано</button>
+                </div>
+              </div>
+              <div class="readiness">
+                <article class="ok"><span>Извещения</span><strong>5/5</strong><em>готово</em></article>
+                <article class="warn"><span>Идентификация</span><strong>4/5</strong><em>гость не сопоставлен</em></article>
+                <article class="warn"><span>Права</span><strong>3/4</strong><em>переводчик ожидает</em></article>
+                <article class="ok"><span>Резерв</span><strong>ВКС + файл</strong><em>готово</em></article>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div><p class="label">Очередь</p><h2>Сгруппировано по риску</h2></div>
+                <button id="toggleOnlyCritical">Только P1</button>
+              </div>
+              <div class="queue">
+                <article class="queue-item p1" data-priority="p1"><b>P1</b><div><strong>Ходатайство о прекращении</strong><span>Блокирует завершение</span></div><button data-open="termination">Решить</button></article>
+                <article class="queue-item p1" data-priority="p1"><b>P1</b><div><strong>Отвод судьи</strong><span>Нужно определение</span></div><button data-open="recusal">Открыть</button></article>
+                <article class="queue-item p1" data-priority="p1"><b>P1</b><div><strong>Подписка переводчика</strong><span>Нет КЭП</span></div><button data-open="signature">Проверить</button></article>
+                <article class="queue-item p2" data-priority="p2"><b>P2</b><div><strong>Договор поставки.pdf</strong><span>Документ на рассмотрении</span></div><button data-open="document">Карточка</button></article>
+                <article class="queue-item p3" data-priority="p3"><b>P3</b><div><strong>Ответчик теряет связь</strong><span>Техническое событие</span></div><button data-action="reserve">Резерв</button></article>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div><p class="label">Контур суда</p><h2>Быстрые действия</h2></div>
+            </div>
+            <div class="quick-grid">
+              <button data-view-jump="registry">Взять документ к рассмотрению</button>
+              <button data-open="visitor">Сверить паспорт</button>
+              <button data-action="admit">Допустить эксперта</button>
+              <button data-view-jump="video">Сузить экран: видео + документ</button>
+              <button data-action="showAll">Показать участника всем</button>
+              <button data-action="judgeRoom">Переговорка судей</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="registry">
+          <section class="registry-card">
+            <div class="toolbar">
+              <button class="primary" data-open="document">Взять к рассмотрению</button>
+              <button data-action="acceptDoc">Принять судом</button>
+              <button data-action="share">Открыть доступ</button>
+              <button data-action="reserveFile">Резервный файл</button>
+              <div class="search">Введите номер дела, Ф.И.О., тип заявки</div>
+              <button>Найти</button>
+            </div>
+            <table>
+              <thead><tr><th></th><th>Событие</th><th>Тип</th><th>От кого</th><th>Срочность</th><th>Статус</th><th>Почему важно</th><th>Действие</th></tr></thead>
+              <tbody>
+                <tr class="selected"><td><span class="radio on"></span></td><td>Ходатайство о прекращении дела</td><td>Ходатайство</td><td>Ответчик</td><td><span class="pill red">P1</span></td><td>Подано</td><td>Влияет на продолжение</td><td><button data-open="termination">Решить</button></td></tr>
+                <tr><td><span class="radio"></span></td><td>Заявление об отводе судьи</td><td>Устное</td><td>Ответчик</td><td><span class="pill red">P1</span></td><td>В очереди</td><td>Блокирует дальнейшую стадию</td><td><button data-open="recusal">Открыть</button></td></tr>
+                <tr><td><span class="radio"></span></td><td>Договор поставки.pdf</td><td>Документ</td><td>Истец</td><td><span class="pill orange">P2</span></td><td id="docState">На рассмотрении</td><td>Нужно принять или отклонить</td><td><button data-open="document">Карточка</button></td></tr>
+                <tr><td><span class="radio"></span></td><td>Нестабильная связь</td><td>Техническое</td><td>Ответчик</td><td><span class="pill gray">T</span></td><td>Зафиксировано</td><td>Не процессуальный отказ</td><td><button data-action="reserve">Резерв</button></td></tr>
+                <tr><td><span class="radio"></span></td><td>Вопрос о порядке выступления</td><td>Заявка</td><td>Истец</td><td><span class="pill blue">P3</span></td><td>В очереди</td><td>Можно решить после P1</td><td><button data-open="request">Ответить</button></td></tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <section class="view" id="video">
+          <section class="video-panel" id="videoPanel">
+            <div class="video-toolbar">
+              <div><p class="label">Видео и ВКС</p><h2>Режимы просмотра</h2></div>
+              <div class="toolbar-actions">
+                <button id="full">На весь экран</button>
+                <button id="compact">Видео + документ</button>
+                <button id="focus">Выбрать участника</button>
+                <button id="normal">Обычный вид</button>
+              </div>
+            </div>
+            <div class="video-layout">
+              <div class="video-grid">
+                <article class="tile court"><span>Суд</span><strong>Н. В. Орлова</strong></article>
+                <article class="tile active"><span>Говорит</span><strong>Истец Иванов И. И.</strong></article>
+                <article class="tile"><span>Ответчик</span><strong>ООО «Вектор»</strong></article>
+                <article class="tile muted"><span>Изолирован</span><strong>Свидетель</strong></article>
+                <article class="tile"><span>Лобби</span><strong>Эксперт</strong></article>
+              </div>
+              <aside class="document-peek">
+                <h3>Карточка рядом с видео</h3>
+                <p>В компактном режиме судья видит документ, срочность и основное действие без ухода из заседания.</p>
+                <button class="primary" data-open="document">Рассмотреть документ</button>
+              </aside>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="party">
+          <div class="role-grid">
+            <section class="panel">
+              <p class="label">АРМ стороны</p>
+              <h2>Участник видит только свои действия</h2>
+              <div class="path"><span class="done">Ссылка</span><span class="done">ЕСИА</span><span class="done">Лобби</span><span class="done">Права</span><span class="current">В зале</span><span>Протокол</span></div>
+              <div class="quick-grid">
+                <button class="primary" data-action="hand">Поднять руку</button>
+                <button data-open="upload">Подать документ</button>
+                <button data-open="request">Заявка суду</button>
+                <button data-action="tech">Сообщить о связи</button>
+              </div>
+            </section>
+            <section class="panel">
+              <p class="label">Открытые материалы</p>
+              <h2>Суд → сторона</h2>
+              <div class="file"><strong>Исковое заявление.pdf</strong><span>Доступ открыт всем участникам</span></div>
+              <div class="file"><strong>Определение суда.pdf</strong><span>Подписано КЭП · получено</span></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="assist">
+          <div class="role-grid four">
+            <article class="panel mini"><span class="pill violet">Свидетель</span><h2>Изолирован</h2><p>Не видит и не слышит зал до вызова.</p><button data-action="callWitness">Вызвать</button></article>
+            <article class="panel mini"><span class="pill orange">Переводчик</span><h2>Подписка</h2><p>КЭП обязательна или нужен резервный протокол.</p><button data-open="signature">Подписать</button></article>
+            <article class="panel mini"><span class="pill blue">Эксперт</span><h2>Квалификация</h2><p>Документы проверены, допуск ожидает суда.</p><button data-action="admit">Допустить</button></article>
+            <article class="panel mini"><span class="pill green">Присяжные</span><h2>Совещательная</h2><p>Отдельный защищенный контур.</p><button data-action="jury">Открыть</button></article>
+          </div>
+        </section>
+
+        <section class="view" id="test">
+          <div class="grid command-grid">
+            <section class="panel">
+              <p class="label">Синтетические респонденты</p>
+              <h2>Проблемы v3</h2>
+              <ul class="findings">
+                <li><b>Судья:</b> искал главное действие среди очереди, быстрых кнопок и drawer.</li>
+                <li><b>Помощник:</b> не сразу понимал, почему допуск гостя невозможен.</li>
+                <li><b>Представитель стороны:</b> путал заявку, ходатайство и техническое сообщение.</li>
+                <li><b>Секретарь:</b> хотел видеть, какие события блокируют протокол.</li>
+                <li><b>Эксперт:</b> не видел, что именно осталось до допуска.</li>
+              </ul>
+            </section>
+            <section class="panel">
+              <p class="label">Решения v4</p>
+              <h2>По эвристикам NN/g</h2>
+              <ul class="findings">
+                <li><b>Visibility of system status:</b> постоянная критическая панель и счетчик P1.</li>
+                <li><b>Recognition rather than recall:</b> причины статуса прямо в строках реестра.</li>
+                <li><b>Error prevention:</b> завершение не просто неактивно, а объясняет блокер.</li>
+                <li><b>User control and freedom:</b> карточку можно закрыть, вернуться и отменить действие.</li>
+                <li><b>Aesthetic and minimalist design:</b> меньше равнозначных сигналов, больше иерархии P1/P2/P3.</li>
+              </ul>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-card">
+        <header><h2 id="drawerTitle">Карточка</h2><div><button id="expandDrawer">⛶</button><button id="closeDrawer">×</button></div></header>
+        <div class="drawer-body" id="drawerBody"></div>
+        <footer><button id="cancelDrawer">Отменить</button><button class="primary" id="confirmDrawer">Сохранить решение</button></footer>
+      </div>
+    </aside>
+    <div class="toast" id="toast"></div>
+    <script src="./script.js"></script>
+  </body>
+</html>
