@@ -73,6 +73,11 @@ h1, h2, h3, p { margin-top: 0; } h1 { margin-bottom: 4px; font-size: 28px; } h2 
 table { width: 100%; border-collapse: collapse; background: #fff; }
 th, td { text-align: left; border-top: 1px solid var(--line); padding: 12px; vertical-align: top; }
 th { background: #f0f2f4; font-weight: 500; }
+.radio { display: none !important; }
+tr.selected td { background: transparent !important; }
+tr:has(.radio) > th:first-child,
+tr:has(.radio) > td:first-child,
+th:empty { display: none; }
 .video-panel { padding: 20px; }
 .video-layout { display: grid; grid-template-columns: 1fr 340px; gap: 14px; margin-top: 14px; }
 .video-grid { min-height: 520px; border-radius: 14px; background: #1b2c38; padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }

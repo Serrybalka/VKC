@@ -13,6 +13,18 @@ const docState = document.getElementById("docState");
 const videoPanel = document.getElementById("videoPanel");
 let critical = 3;
 
+function normalizeStaticTables() {
+  document.querySelectorAll(".radio").forEach((item) => item.remove());
+  document.querySelectorAll("tr.selected").forEach((row) => row.classList.remove("selected"));
+  document.querySelectorAll("th").forEach((head) => {
+    if (!head.textContent.trim()) head.remove();
+  });
+  document.querySelectorAll("tr").forEach((row) => {
+    const first = row.firstElementChild;
+    if (first && !first.textContent.trim() && first.children.length === 0) first.remove();
+  });
+}
+
 const templates = {
   termination: {
     title: "Ходатайство о прекращении дела",
@@ -136,3 +148,5 @@ document.getElementById("normal").addEventListener("click", () => { videoPanel.c
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") drawer.classList.remove("open", "expanded");
 });
+
+normalizeStaticTables();
