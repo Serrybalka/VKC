@@ -72,7 +72,7 @@ h1, h2, h3, p { margin-top: 0; } h1 { margin-bottom: 4px; font-size: 28px; } h2 
 .search { min-height: 40px; min-width: 300px; border: 1px solid var(--line); border-radius: 8px; padding: 9px 14px; color: var(--muted); flex: 1; }
 table { width: 100%; border-collapse: collapse; background: #fff; }
 th, td { text-align: left; border-top: 1px solid var(--line); padding: 12px; vertical-align: top; }
-th { background: #f0f2f4; font-weight: 500; } tr.selected td { background: var(--blue-200); }
+th { background: #f0f2f4; font-weight: 500; }
 .video-panel { padding: 20px; }
 .video-layout { display: grid; grid-template-columns: 1fr 340px; gap: 14px; margin-top: 14px; }
 .video-grid { min-height: 520px; border-radius: 14px; background: #1b2c38; padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
